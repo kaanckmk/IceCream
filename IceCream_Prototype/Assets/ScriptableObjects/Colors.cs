@@ -7,5 +7,6 @@ public class Color : ScriptableObject
 {
     public Sprite colorTexture;
     public string name;
+    public int colorID;
 
 }

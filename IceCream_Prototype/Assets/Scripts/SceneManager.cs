@@ -5,8 +5,9 @@ using UnityEngine.UI;
 public class SceneManager : MonoBehaviour
 {
     public Color[] colors;
-    public List<GameObject> buttons = new List<GameObject>();
-
+    public List<ButtonStruct> buttons = new List<ButtonStruct>();
+    public List<PumperStickStruct> pumperSticks = new List<PumperStickStruct>();
+ 
     [SerializeField] private GameObject _creamPumperParent;
     [SerializeField] private GameObject _buttonsPanel;
     [SerializeField] private GameObject _buttonPrefab;
@@ -21,20 +22,27 @@ public class SceneManager : MonoBehaviour
         {
             
             //instantiate buttons
-            buttons.Add(Instantiate(_buttonPrefab, _buttonsPanel.transform));
-            buttons[i].name = "Button" + colors[i].name; 
-            buttons[i].GetComponent<Button>().image.sprite = colors[i].colorTexture;
+            ButtonStruct tmpButton = new ButtonStruct();
+            tmpButton.button =  Instantiate(_buttonPrefab, _buttonsPanel.transform);
+            tmpButton.buttonID = colors[i].colorID;
+            tmpButton.button.name = "Button" + colors[i].name; 
+            tmpButton.button.GetComponent<Button>().image.sprite = colors[i].colorTexture;
+            buttons.Add(tmpButton);
             
-            //instantiate pumper sticks
-            GameObject pumperStick = Instantiate(_creamPumperStickPrefab, _creamPumperParent.transform);
-            pumperStick.GetComponent<Renderer>().material.SetTexture("_MainTex",colors[i].colorTexture.texture);
-            
-            pumperStick.name = "Pumper" + colors[i].name;
+            //instantiate pumper sticks and add it to list
+            PumperStickStruct tmpPumperStick = new PumperStickStruct();
+            tmpPumperStick.pumperStick  = Instantiate(_creamPumperStickPrefab, _creamPumperParent.transform);
+            tmpPumperStick.pumperStick.GetComponent<Renderer>().material.SetTexture("_MainTex",colors[i].colorTexture.texture);
+            tmpPumperStick.pumperStick.name = "Pumper" + colors[i].name;
+            tmpPumperStick.pumperStickID = colors[i].colorID;
+            pumperSticks.Add(tmpPumperStick);
             
             //horizontal layout allignment of pumper sticks
             float x = (_magicValueForAllignment / (colors.Length + 1)) * (i+1);
-            pumperStick.transform.localPosition =
-                new Vector3(pumperStick.transform.localPosition.x - x, pumperStick.transform.localPosition.y, pumperStick.transform.localPosition.z);
+            tmpPumperStick.pumperStick.transform.localPosition =
+                new Vector3(tmpPumperStick.pumperStick.transform.localPosition.x - x,
+                    tmpPumperStick.pumperStick.transform.localPosition.y,
+                    tmpPumperStick.pumperStick.transform.localPosition.z);
 
         }
     }
