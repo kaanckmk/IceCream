@@ -3,42 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class ButtonManager : MonoBehaviour, IPointerDownHandler
+public class ButtonManager : MonoBehaviour, IPointerDownHandler,IPointerUpHandler
 {
-    public SceneManager sceneManager;
-    public ButtonStruct button;
     
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        sceneManager = FindObjectOfType<SceneManager>();
-    }
-    
+    private bool _isHolding;
 
+    
+    private void Update()
+    {
+        if (_isHolding)
+        {
+            Actions.OnButtonHolding?.Invoke();
+        }
+    }
     public void OnPointerDown(PointerEventData eventData)
     {
-        Actions.OnButtonPressed?.Invoke();
-        
-        //findout what is the id of pressed button
-        button = new ButtonStruct();
-        button.button = this.gameObject;
-        foreach (var a in sceneManager.buttons)
-        {
-            if (a.button == button.button)
-            {
-                button.buttonID = a.buttonID;
-            }
-        }
-
-        /*
-        Debug.Log(button.buttonID);
-        Debug.Log(button.button.name);*/
+        Actions.OnButtonPressed?.Invoke(this.gameObject);
+        _isHolding = true;
     }
-
-    public int GetButtonID()
+    public void OnPointerUp(PointerEventData eventData)
     {
-        return button.buttonID;
+        Actions.OnButtonReleased?.Invoke(this.gameObject);
+        _isHolding = false;
     }
+
 }

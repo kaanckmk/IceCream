@@ -911,12 +911,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colors:
+  - {fileID: 11400000, guid: 8c2568210ca35c44bb2d3967b2e3b683, type: 2}
   - {fileID: 11400000, guid: 22746928ac227b24d998dfb08a3332da, type: 2}
   - {fileID: 11400000, guid: 2a7641a26a533cf4abbf6a36b3abb6ad, type: 2}
+  buttonprefab: {fileID: 4457924383898152831, guid: ec8edf62feb746246a87ee7034261bc2, type: 3}
+  pumperStickPrefab: {fileID: 6557786672013130196, guid: 9899d4b771c442e4999c7da775960320, type: 3}
   _creamPumperParent: {fileID: 1163987175}
   _buttonsPanel: {fileID: 839258041}
-  _buttonPrefab: {fileID: 4457924383898152831, guid: fb6147b39d5507245b046ca5bab89565, type: 3}
-  _creamPumperStickPrefab: {fileID: 6557786672013130196, guid: 9899d4b771c442e4999c7da775960320, type: 3}
 --- !u!4 &707481548
 Transform:
   m_ObjectHideFlags: 0
@@ -958,8 +959,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 734232869}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.7280579, z: 0}
-  m_LocalScale: {x: 0.6756475, y: 1.3775766, z: 0.5364065}
+  m_LocalPosition: {x: 0.0399971, y: 0.49805832, z: 0}
+  m_LocalScale: {x: 0.67564756, y: 1.3775767, z: 0.5364065}
   m_Children:
   - {fileID: 1403977104}
   m_Father: {fileID: 2122883281}
@@ -1460,7 +1461,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1163987175}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1469,7 +1470,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.37, y: 0}
+  m_AnchoredPosition: {x: 1.409996, y: -0.22999954}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1163987177
@@ -1484,8 +1485,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ee05bff24109384fa60e3e0ae0e00b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneManager: {fileID: 707481547}
-  buttonManager: {fileID: 0}
 --- !u!1 &1225878969
 GameObject:
   m_ObjectHideFlags: 0
@@ -2590,6 +2589,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2122883281}
+  - component: {fileID: 2122883282}
   m_Layer: 0
   m_Name: -----Cream Machine-----
   m_TagString: Untagged
@@ -2605,7 +2605,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2122883280}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 54.926, y: 10, z: 0}
+  m_LocalPosition: {x: 54.886, y: 10.23, z: -0.575}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 734232870}
@@ -2613,6 +2613,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2122883282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122883280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf26c346d9b9a384496f9835203a4906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2139261713
 GameObject:
   m_ObjectHideFlags: 0
