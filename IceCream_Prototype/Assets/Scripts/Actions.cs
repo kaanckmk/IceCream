@@ -9,7 +9,7 @@ public static class Actions
     
     public static Action<GameObject> OnButtonPressed;
     public static Action<GameObject> OnButtonReleased;
-    public static Action OnButtonHolding;
+    public static Action<GameObject> OnButtonHolding;
 
 
     public static Action OnGameFinished;

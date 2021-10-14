@@ -15,7 +15,7 @@ public class ButtonController: MonoBehaviour, IPointerDownHandler,IPointerUpHand
     {
         if (_isHolding)
         {
-            Actions.OnButtonHolding?.Invoke();
+            Actions.OnButtonHolding?.Invoke(this.gameObject);
         }
     }
     public void OnPointerDown(PointerEventData eventData)
