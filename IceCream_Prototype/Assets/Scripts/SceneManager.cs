@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using com.flamingo.icecream.pumperstick;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class SceneManager : MonoBehaviour
 {
     public Color[] colors;
@@ -10,8 +12,8 @@ public class SceneManager : MonoBehaviour
     public GameObject buttonprefab;
     public GameObject pumperStickPrefab;
     
-    [SerializeField] private GameObject _creamPumperParent;
-    [SerializeField] private GameObject _buttonsPanel;
+    [SerializeField] private Transform _creamPumperParent;
+    [SerializeField] private Transform _buttonsPanel;
     
 
     private float _magicValueForAllignment = 2.8f;
@@ -21,11 +23,11 @@ public class SceneManager : MonoBehaviour
     {
         for (int i = 0; i < colors.Length; i++)
         {
-            GameObject button =  Instantiate(buttonprefab,_buttonsPanel.transform);
+            GameObject button =  Instantiate(buttonprefab,_buttonsPanel);
             button.name = "Button" + colors[i].colorName;
             button.GetComponent<Button>().image.sprite = colors[i].colorTexture;
             
-            GameObject pumperStick = Instantiate(pumperStickPrefab, _creamPumperParent.transform);
+            GameObject pumperStick = Instantiate(pumperStickPrefab, _creamPumperParent);
             pumperStick.GetComponent<Renderer>().material.SetTexture("_MainTex",colors[i].colorTexture.texture);
             pumperStick.name = "Pumper" + colors[i].colorName;
             

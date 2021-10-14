@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PumperStick
+namespace com.flamingo.icecream.pumperstick
 {
-    public GameObject pumperStick;
-    public GameObject button;
-
-    public PumperStick( GameObject pumperStick, GameObject button)
+    public class PumperStick
     {
-         this.pumperStick = pumperStick;
-         this.button = button;
+        public GameObject pumperStick;
+        public GameObject button;
+
+        public PumperStick( GameObject pumperStick, GameObject button)
+        {
+            this.pumperStick = pumperStick;
+            this.button = button;
+        }
     }
+
+    
 }

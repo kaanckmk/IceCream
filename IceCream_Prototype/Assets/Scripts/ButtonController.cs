@@ -5,11 +5,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ButtonManager : MonoBehaviour, IPointerDownHandler,IPointerUpHandler
+public class ButtonController: MonoBehaviour, IPointerDownHandler,IPointerUpHandler
 {
     
     private bool _isHolding;
-
+    
     
     private void Update()
     {

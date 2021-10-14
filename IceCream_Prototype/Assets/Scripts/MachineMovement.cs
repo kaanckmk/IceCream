@@ -9,12 +9,9 @@ public class MachineMovement : MonoBehaviour
     private float _speed = (2 * Mathf.PI) / 3; //2*PI in degress is 360, so you get 3 seconds to complete a circle
     private float _radius= 0.007f;
     private float _timer = 3f;
-    
-    
     private void OnEnable()
     {
         Actions.OnButtonHolding += MoveMachine;
-
     }
 
     private void OnDisable()

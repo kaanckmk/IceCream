@@ -284,7 +284,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &285236076
 GameObject:
@@ -459,7 +459,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &395038021
 GameObject:
@@ -735,7 +735,7 @@ GameObject:
   m_Component:
   - component: {fileID: 571736604}
   m_Layer: 0
-  m_Name: Wall
+  m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -879,7 +879,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 124.785, y: 34.97, z: 0}
 --- !u!1 &707481546
 GameObject:
@@ -916,8 +916,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2a7641a26a533cf4abbf6a36b3abb6ad, type: 2}
   buttonprefab: {fileID: 4457924383898152831, guid: ec8edf62feb746246a87ee7034261bc2, type: 3}
   pumperStickPrefab: {fileID: 6557786672013130196, guid: 9899d4b771c442e4999c7da775960320, type: 3}
-  _creamPumperParent: {fileID: 1163987175}
-  _buttonsPanel: {fileID: 839258041}
+  _creamPumperParent: {fileID: 1163987176}
+  _buttonsPanel: {fileID: 839258042}
 --- !u!4 &707481548
 Transform:
   m_ObjectHideFlags: 0
@@ -1316,7 +1316,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 5.728, y: -180, z: 0}
 --- !u!1 &1044775846
 GameObject:
@@ -1448,7 +1448,7 @@ GameObject:
   - component: {fileID: 1163987176}
   - component: {fileID: 1163987177}
   m_Layer: 0
-  m_Name: Pumpers
+  m_Name: PumperSticks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1697,7 +1697,7 @@ GameObject:
   - component: {fileID: 1403977106}
   - component: {fileID: 1403977105}
   m_Layer: 0
-  m_Name: Pump
+  m_Name: Pumper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2590,6 +2590,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2122883281}
   - component: {fileID: 2122883282}
+  - component: {fileID: 2122883283}
   m_Layer: 0
   m_Name: -----Cream Machine-----
   m_TagString: Untagged
@@ -2625,6 +2626,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf26c346d9b9a384496f9835203a4906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2122883283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122883280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba4ee5fb37f59eb44a5acc33f68a732d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _creamPrefab: {fileID: 2384629214509581837, guid: 36b9b82bb143831419bf2e7113dad3ac, type: 3}
+  _creamPumperPrefab: {fileID: 1403977104}
 --- !u!1 &2139261713
 GameObject:
   m_ObjectHideFlags: 0
