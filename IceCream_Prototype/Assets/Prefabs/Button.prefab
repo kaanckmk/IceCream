@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4457924383898152801}
   - component: {fileID: -2587488670293602582}
   m_Layer: 5
-  m_Name: ButtonPrefab
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 0.40560913, y: 0}
+  m_SizeDelta: {x: 80.7692, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4457924383898152803
 CanvasRenderer:
@@ -133,4 +133,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ff6bf3c79d4b948a823e61ff2735d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneManager: {fileID: 0}

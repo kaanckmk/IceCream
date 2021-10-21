@@ -13,6 +13,8 @@ public static class Actions
 
 
     public static Action OnGameFinished;
+    public static Action OnNewLevelStarted;
+    public static Action OnTargetCreated;
 
 
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using com.flamingo.icecream.managers;
 
 namespace com.flamingo.icecream.pumperstick
 {
