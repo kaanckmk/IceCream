@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,12 +22,14 @@ namespace com.flamingo.icecream.controllers
         {
             Actions.OnGameFinished += ActivateFinishUI;
             Actions.OnTargetCreated += SetTargetImage;
+            Actions.OnNewLevelStarted += ActivateGameUI;
         }
 
         private void OnDisable()
         { 
             Actions.OnGameFinished -= ActivateFinishUI;
             Actions.OnTargetCreated -= SetTargetImage;
+            Actions.OnNewLevelStarted -= ActivateGameUI;
         }
 
         void Start()
@@ -42,16 +45,42 @@ namespace com.flamingo.icecream.controllers
             SetAccuracyText();
         }
 
+        public void ActivateGameUI()
+        {
+            _buttonPanel.SetActive(true);
+            _targetIceCreamPanel.SetActive(true);
+            _finishPanel.SetActive(false);
+        }
+
         public void SetAccuracyText()
         {
-            Debug.Log(_finishPanel.transform.Find("Accuracy").name);   //gameObject.GetComponent<TextMeshPro>().text = "Accuracy is:  %";// + _creamGenerator.GetPercentage();
+            _finishPanel.transform.Find("Accuracy").gameObject.GetComponent<TMP_Text>().text = 
+                "Accuracy is:  %" + _creamGenerator.GetAccuracy();
         }
 
         public void SetTargetImage()
         {
-            _targetIceCreamPanel.transform.Find("Image").GetComponent<Image>().sprite = 
-                Resources.Load<Sprite>("LevelTargetImages/" +_levelManager.currentLevel + ".png" );
+            
+            Texture2D targetTexture = new Texture2D(2,2);
+            targetTexture = Resources.Load (string.Format("LevelTargetImages/{0}",
+                _levelManager.currentLevel)) as Texture2D;
+
+            _targetIceCreamPanel.transform.Find("RawImage").GetComponent<RawImage>().texture = targetTexture;
+
         }
+        /*
+        public static Texture2D LoadPNG(string filePath) {
+     
+            Texture2D tex = null;
+            byte[] fileData;
+     
+            if (File.Exists(filePath)) {
+                fileData = File.ReadAllBytes(filePath);
+                tex = new Texture2D(2, 2);
+                tex.LoadImage(fileData); //..this will auto-resize the texture dimensions.
+            }
+            return tex;
+        }*/
     
     }
     

@@ -31,7 +31,7 @@ namespace com.flamingo.icecream.managers
             Actions.OnGameFinished -= CreateNewScene;
         }
 
-        void Awake()
+        void Start()
         {
             Actions.OnNewLevelStarted?.Invoke();
             CreateNewScene();
@@ -40,7 +40,7 @@ namespace com.flamingo.icecream.managers
         {
             InitializeScene();
             
-            _colors = _levelManager.SetColorsOfLevel();
+            _colors = _levelManager.GetColorsOfLevel();
             
             for (int i = 0; i < _colors.Count; i++)
             {

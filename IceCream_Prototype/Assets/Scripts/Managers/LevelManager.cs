@@ -17,6 +17,7 @@ namespace com.flamingo.icecream.managers
         private int _currentColorNumber;
         private List<CreamColor> _currentLevelColors = new List<CreamColor>();
         
+        
         private void OnEnable()
         {
             Actions.OnGameFinished += IncreaseLevel;
@@ -26,12 +27,17 @@ namespace com.flamingo.icecream.managers
         { 
             Actions.OnGameFinished -= IncreaseLevel;
         }
+
+        void Awake()
+        {
+            SetColorsOfLevel();
+        }
         
         public List<CreamColor> SetColorsOfLevel()
         {
-            //color number in a game will be incrased in every 5 level. 
+            //color number in a game will be incrased in every 3 level. 
             //starting number of colors is 2 for the first levels
-            _currentColorNumber = (int)Mathf.Floor(currentLevel / 5) + 2;
+            _currentColorNumber = (int)Mathf.Floor(currentLevel / 3) + 2;
             List<CreamColor> tmp = new List<CreamColor>();
             for (int i = 0; i < _allColors.Count; i++)
             {
@@ -52,12 +58,19 @@ namespace com.flamingo.icecream.managers
 
         public List<CreamColor> GetColorsOfLevel()
         {
-            return _currentLevelColors;
+            
+            List<CreamColor> tmp = new List<CreamColor>();
+            tmp.Clear();
+            for (int i = 0; i < _currentLevelColors.Count; i++)
+            {
+                tmp.Add(_currentLevelColors[i]);
+            }
+            return tmp;
         }
 
         public void IncreaseLevel()
         {
-            InitializeNewLevelColors();
+            SetColorsOfLevel();
             currentLevel += 1;
             _levelText.text = "Level " + currentLevel;
         }

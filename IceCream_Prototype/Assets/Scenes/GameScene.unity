@@ -1405,7 +1405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spline: {fileID: 7787754885259317662}
   travelMode: 0
-  speed: 4
+  speed: 6.6
   m_normalizedT: 0
   rotationLerpModifier: 10
   lookAt: 1
@@ -1415,8 +1415,8 @@ MonoBehaviour:
   accuracyIDs: 
   _targetCreamPrefab: {fileID: 2455590890644597597, guid: 893a0dbf2f2e3354482720be1ec59a43, type: 3}
   _targetCreamParent: {fileID: 402430525}
-  _levelManager: {fileID: 2142531103}
   _spline: {fileID: 7787754885259317662}
+  _levelManager: {fileID: 2142531103}
 --- !u!4 &1359886752
 Transform:
   m_ObjectHideFlags: 0
@@ -1443,6 +1443,7 @@ GameObject:
   - component: {fileID: 1395129176}
   - component: {fileID: 1395129175}
   - component: {fileID: 1395129174}
+  - component: {fileID: 1395129177}
   m_Layer: 5
   m_Name: NextLevel
   m_TagString: Untagged
@@ -1552,6 +1553,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1395129172}
   m_CullTransparentMesh: 1
+--- !u!114 &1395129177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395129172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05826e1ca016c3f44a759f607935ca7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1403977103
 GameObject:
   m_ObjectHideFlags: 0
@@ -1677,14 +1690,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1914184251}
+  - {fileID: 1995413542}
   m_Father: {fileID: 285236080}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 67.259995, y: 44.5715}
-  m_SizeDelta: {x: 134.52, y: 141.5224}
+  m_AnchoredPosition: {x: 49.75, y: 25.641502}
+  m_SizeDelta: {x: 99.5, y: 176.6135}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1577197604
 MonoBehaviour:
@@ -1888,9 +1901,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30a4c02f859c65c409a22029fbc03bb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resWidth: 2550
-  resHeight: 1000
+  resWidth: 400
+  resHeight: 800
   _levelManager: {fileID: 2142531103}
+  _targetIceCreamPanel: {fileID: 1577197602}
 --- !u!20 &1640293961
 Camera:
   m_ObjectHideFlags: 0
@@ -1914,7 +1928,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.73
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -2160,7 +2174,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1883250981}
   m_CullTransparentMesh: 1
---- !u!1 &1914184250
+--- !u!1 &1995413541
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2168,23 +2182,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1914184251}
-  - component: {fileID: 1914184253}
-  - component: {fileID: 1914184252}
+  - component: {fileID: 1995413542}
+  - component: {fileID: 1995413544}
+  - component: {fileID: 1995413543}
   m_Layer: 5
-  m_Name: Image
+  m_Name: RawImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &1914184251
+--- !u!224 &1995413542
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1914184250}
+  m_GameObject: {fileID: 1995413541}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -2194,19 +2208,19 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000002861, y: -0.00007987}
-  m_SizeDelta: {x: 134.52, y: 141.52}
+  m_AnchoredPosition: {x: 0, y: 0.00063515}
+  m_SizeDelta: {x: 99.5, y: 176.61}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1914184252
+--- !u!114 &1995413543
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1914184250}
+  m_GameObject: {fileID: 1995413541}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -2217,23 +2231,20 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1914184253
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &1995413544
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1914184250}
+  m_GameObject: {fileID: 1995413541}
   m_CullTransparentMesh: 1
 --- !u!1 &2025531192
 GameObject:
@@ -2408,7 +2419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spline: {fileID: 7787754885259317662}
   travelMode: 0
-  speed: 4
+  speed: 2
   m_normalizedT: 0
   rotationLerpModifier: 10
   lookAt: 0
@@ -2432,7 +2443,6 @@ MonoBehaviour:
   _creamPumperPrefab: {fileID: 1403977104}
   _spline: {fileID: 7787754885259317662}
   _machineMovement: {fileID: 2122883282}
-  _levelManager: {fileID: 2142531103}
   _targetIceCreamController: {fileID: 1359886751}
 --- !u!1 &2139261713
 GameObject:

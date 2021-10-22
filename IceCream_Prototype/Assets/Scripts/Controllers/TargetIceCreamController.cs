@@ -7,35 +7,68 @@ using com.flamingo.icecream.managers;
 public class TargetIceCreamController : BezierWalkerWithSpeed
 {
 
-    public List<int> accuracyIDs;
-    public List<int> percentagesOfColors;
+    public List<int> accuracyIDs= new List<int>();
         
     private List<CreamColor> _colors;
     private int _numberOfColors;
-    private int _counter;
-    private float _nextPercentage;
+    private int _counter = 0;
+    private float _nextPercentage = 0f;
+    private List<int> _percentagesOfColors = new List<int>();
+    private bool _isActive = true;
+    
+    private int _fullPercent = 10;
     
     [SerializeField] private GameObject _targetCreamPrefab;
     [SerializeField] private Transform _targetCreamParent;
-    [SerializeField] private LevelManager _levelManager;
     [SerializeField] private BezierSpline _spline;
+    [SerializeField] private LevelManager _levelManager;
 
-
-    void Start()
+    private void OnEnable()
     {
-        accuracyIDs = new List<int>();
-        percentagesOfColors = new List<int>();
+        Actions.OnGameFinished += Activate;
+    }
+
+    private void OnDisable()
+    {
+        Actions.OnGameFinished -= Activate;
+    }
+
+    public void Initialize()
+    {
+        
         _colors = _levelManager.GetColorsOfLevel();
         _numberOfColors = _colors.Count;
         SetPercentages();
-        _nextPercentage = 0f;
+        
+        accuracyIDs.Clear();
         _counter = 0;
+        NormalizedT = 0;
+        
+        foreach (Transform child in _targetCreamParent) {
+            Destroy(child.gameObject);
+        }
+        
+    }
+    
+    void Start()
+    {
+        _colors = _levelManager.GetColorsOfLevel();
+        _numberOfColors = _colors.Count;
+        SetPercentages();
     }
 
     protected override void Update()
     {
-        base.Update();
-        GenerateTargetCream();
+        if (_isActive)
+        {
+            base.Update();
+            GenerateTargetCream();
+        }
+        else
+        {
+            return;
+        }
+        
     }
 
     
@@ -45,7 +78,7 @@ public class TargetIceCreamController : BezierWalkerWithSpeed
         {
             if (_counter == 0)
             {
-                _nextPercentage = percentagesOfColors[_counter] / 10f;
+                _nextPercentage = _percentagesOfColors[_counter] / 10f;
             }
             else
             {
@@ -53,7 +86,7 @@ public class TargetIceCreamController : BezierWalkerWithSpeed
                 
                 for (int i = 0; i <= _counter; i++)
                 {
-                    _nextPercentage += percentagesOfColors[i] / 10f;
+                    _nextPercentage += _percentagesOfColors[i] / 10f;
                 }
             }
         
@@ -64,6 +97,7 @@ public class TargetIceCreamController : BezierWalkerWithSpeed
                     transform.rotation, _targetCreamParent);
                 targetCream.GetComponent<Renderer>().material.SetTexture("_MainTex",_colors[_counter].colorTexture.texture);
                 targetCream.layer = 6;
+                
                 accuracyIDs.Add(_counter);
                 
                 if (NormalizedT >= _nextPercentage)
@@ -71,31 +105,46 @@ public class TargetIceCreamController : BezierWalkerWithSpeed
                     _counter++;
                 }
             }
-            
         }
-        
-        
+        else
+        {
+            _isActive = false;
+        }
     }
 
+    public void Activate()
+    {
+        Initialize();
+        GenerateTargetCream();
+        _isActive = true;
+    }
+
+    
     //set percentages of different color creams
     public void SetPercentages()
     {
-        int fullPercent = 10;
 
+        _percentagesOfColors.Clear();
+        
         for (int i = 0; i < _numberOfColors; i++)
         {
-            percentagesOfColors.Add(0);
+            _percentagesOfColors.Add(0);
         }
-        for (int i = 0; i <fullPercent; i++) {
+        for (int i = 0; i <_fullPercent; i++) {
  
             // Increment any random element from the list by 1
-            percentagesOfColors[Random.Range(0,percentagesOfColors.Count )]++;
+            _percentagesOfColors[Random.Range(0,_percentagesOfColors.Count )]++;
         }
         
         /*
-        for (int i = 0; i < percentagesOfColors.Count; i++)
+        for (int i = 0; i < _percentagesOfColors.Count; i++)
         {
-            Debug.Log(percentagesOfColors[i]);
+            Debug.Log(_percentagesOfColors[i]);
         }*/
+    }
+
+    public List<int> GetPercentages()
+    {
+        return _percentagesOfColors;
     }
 }

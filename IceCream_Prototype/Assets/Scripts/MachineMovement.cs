@@ -20,14 +20,23 @@ public class MachineMovement : BezierWalkerWithSpeed
     {
         Actions.OnButtonHolding += MoveAroundCurve;
         Actions.OnButtonReleased += StopMovement;
+        Actions.OnGameFinished += Initialize;
     }
 
     private void OnDisable()
     {
         Actions.OnButtonHolding -= MoveAroundCurve;
         Actions.OnButtonReleased -= StopMovement;
+        Actions.OnGameFinished -= Initialize;
     }
 
+    public void Initialize()
+    {
+        _initialHeight = transform.position.y;
+        _isActive = false;
+        _isFinished = false;
+        NormalizedT = 0;
+    }
     private void Awake()
     {
         _initialHeight = transform.position.y;
@@ -52,9 +61,6 @@ public class MachineMovement : BezierWalkerWithSpeed
         if (NormalizedT == 1f && !_isFinished)
         {
             Actions.OnGameFinished?.Invoke();
-            _isFinished = true;
-            //Debug.Log("finished");
-            NormalizedT = 0f;
         }
     }
     private void UpdateHeightPosition()

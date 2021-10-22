@@ -1,16 +1,19 @@
 using UnityEngine;
 using System.Collections;
 using com.flamingo.icecream.managers;
+using UnityEditor;
+using UnityEngine.UI;
 
 public class ScreenShot : MonoBehaviour 
 {
-    public int resWidth = 2550; 
-    public int resHeight = 3300;
+    public int resWidth = 50; 
+    public int resHeight = 100;
  
     private bool takeHiResShot = false;
-    private float _timer=0f;
 
     [SerializeField] private LevelManager _levelManager;
+
+    [SerializeField] private GameObject _targetIceCreamPanel;
     
      
     private void OnEnable()
@@ -23,7 +26,12 @@ public class ScreenShot : MonoBehaviour
         Actions.OnNewLevelStarted -= TakeScreenShot;
     }
 
-    public  string ScreenShotName(int width, int height) {
+    void Start()
+    {
+        TakeScreenShot();
+    }
+
+    public  string ScreenShotName() {
         return string.Format("{0}/Resources/LevelTargetImages/{1}.png", 
             Application.dataPath, 
             _levelManager.currentLevel);
@@ -32,12 +40,11 @@ public class ScreenShot : MonoBehaviour
     public void TakeScreenShot()
     {
             StartCoroutine(WaitTillTargetImageFinished());
-            
     }
 
     IEnumerator WaitTillTargetImageFinished()
     {
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(4);
         
         RenderTexture rt = new RenderTexture(resWidth, resHeight, 24);
         GetComponent<Camera>().targetTexture = rt;
@@ -49,10 +56,14 @@ public class ScreenShot : MonoBehaviour
         RenderTexture.active = null; // JC: added to avoid errors
         Destroy(rt);
         byte[] bytes = screenShot.EncodeToPNG();
-        string filename = ScreenShotName(resWidth, resHeight);
+        string filename = ScreenShotName();
         System.IO.File.WriteAllBytes(filename, bytes);
-        Debug.Log(string.Format("Took screenshot to: {0}", filename));
+
+        
+        //Debug.Log(string.Format("Took screenshot to: {0}", filename));
         takeHiResShot = false;
+        AssetDatabase.Refresh();
+        
         Actions.OnTargetCreated?.Invoke();
     }
 

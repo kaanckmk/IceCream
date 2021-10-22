@@ -6,6 +6,7 @@ using BezierSolution;
 using Microsoft.Unity.VisualStudio.Editor;
 using Image = UnityEngine.UI.Image;
 using com.flamingo.icecream.managers;
+using UnityEditor.Experimental;
 
 public class CreamGenerator : MonoBehaviour
 {
@@ -14,28 +15,43 @@ public class CreamGenerator : MonoBehaviour
     [SerializeField] private Transform _creamParent;
     [SerializeField] private Transform _creamPumperPrefab;
     [SerializeField] private BezierSpline _spline;
+    
     [SerializeField] private MachineMovement _machineMovement;
     //to check match
     [SerializeField] private TargetIceCreamController _targetIceCreamController;
+    
 
-    
-    private List<CreamColor> _colors;
-    private List<int> _accuracy = new List<int>();
-    private float _percentage=0;
+    private int _creamCounter = 0;
+    private float _percentage;
     private int _scorepoint=0;
+    private List<int> _colorPercentage;
+    private int _colorCounter = 0;
+    private float _nextPercentage = 0;
     
+    public void Initialize()
+    {
+        _creamCounter = 0;
+        _colorCounter = 0;
+        _scorepoint = 0;
+        _nextPercentage = 0;
+        _percentage = 0;
+        _colorPercentage = _targetIceCreamController.GetPercentages();
+    }
     private void OnEnable()
     {
         Actions.OnButtonHolding += GenerateCream;
         Actions.OnGameFinished += StopCreamGeneration;
-        Actions.OnGameFinished += CheckAccuracy;
     }
 
     private void OnDisable()
     { 
         Actions.OnButtonHolding -= GenerateCream;
         Actions.OnGameFinished -= StopCreamGeneration;
-        Actions.OnGameFinished -= CheckAccuracy;
+    }
+
+    void Start()
+    {
+        Initialize();
     }
 
     public void GenerateCream(GameObject button)
@@ -44,13 +60,14 @@ public class CreamGenerator : MonoBehaviour
         var cream = Instantiate(_creamPrefab, _creamPumperPrefab.position, transform.rotation,_creamParent);
         cream.GetComponent<Renderer>().material.SetTexture("_MainTex",button.GetComponent<Image>().sprite.texture);
         cream.transform.DOMove((_spline.GetPoint(_machineMovement.NormalizedT)), 1f);
-
+        _creamCounter++;
+        CheckAccuracy(button);
         
         //Debug.Log(_machineMovement.NormalizedT);
         
         
-        /*
-         As a first aproach: joint system is tried to connect cream segments with each other. Not an expected result!
+        /* As a first aproach: joint system is tried to connect cream segments with each other. Not an expected result!
+         
         _timer -= Time.deltaTime;
         if (_timer <= 0)
         {
@@ -68,32 +85,57 @@ public class CreamGenerator : MonoBehaviour
 
     public void StopCreamGeneration()
     {
+        Initialize();
+        
         foreach (Transform child in _creamParent) {
             Destroy(child.gameObject);
         }
     }
 
-    public void CheckAccuracy()
+    public void CheckAccuracy(GameObject button)
     {
-        List<int> targetAccuracy = _targetIceCreamController.accuracyIDs;
-        
-        Debug.Log(targetAccuracy.Count + "    " + _accuracy.Count);
-        
-        for (int i = 0; i < targetAccuracy.Count; i++)
+        var id = button.transform.GetSiblingIndex();
+
+        if (_machineMovement.NormalizedT < 1)
         {
-            if (_accuracy[i] == targetAccuracy[i])
+            if (_colorCounter == 0)
             {
-                _scorepoint++;
+                _nextPercentage = _colorPercentage[_colorCounter] / 10f;
             }
             else
             {
-                _scorepoint--;
+                _nextPercentage = 0;
+                
+                for (int i = 0; i <= _colorCounter; i++)
+                {
+                    _nextPercentage += _colorPercentage[i] / 10f;
+                }
             }
+        
+            if (_colorCounter < _colorPercentage.Count)
+            {
+                if (id == _colorCounter)
+                {
+                    _scorepoint++;
+                }
+                else
+                {
+                    _scorepoint--;
+                }
+                if (_machineMovement.NormalizedT >= _nextPercentage)
+                {
+                    _colorCounter++;
+                }
+            }
+            
         }
-        _percentage = Mathf.Floor((_scorepoint * 100) / targetAccuracy.Count);
+        
+        _percentage = Mathf.Floor((_scorepoint * 100) / _creamCounter);
     }
 
-    public float GetPercentage()
+
+
+    public float GetAccuracy()
     {
         return _percentage;
     }
