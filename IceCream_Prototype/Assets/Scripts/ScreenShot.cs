@@ -44,7 +44,7 @@ public class ScreenShot : MonoBehaviour
 
     IEnumerator WaitTillTargetImageFinished()
     {
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(4.5f);
         
         RenderTexture rt = new RenderTexture(resWidth, resHeight, 24);
         GetComponent<Camera>().targetTexture = rt;

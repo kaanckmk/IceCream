@@ -12,7 +12,7 @@ namespace com.flamingo.icecream.controllers
     {
         [SerializeField] private GameObject _buttonPanel;        
         [SerializeField] private GameObject _targetIceCreamPanel;
-        
+        [SerializeField] private GameObject _waitPanel;
         [SerializeField] private GameObject _finishPanel;
 
         [SerializeField] private CreamGenerator _creamGenerator;
@@ -36,6 +36,7 @@ namespace com.flamingo.icecream.controllers
         {
             _buttonPanel.SetActive(true);
             _targetIceCreamPanel.SetActive(true);
+            ActivateGameUI();
         }
         public void ActivateFinishUI()
         {
@@ -47,9 +48,17 @@ namespace com.flamingo.icecream.controllers
 
         public void ActivateGameUI()
         {
+            _finishPanel.SetActive(false);
+            _waitPanel.SetActive(true);
+            StartCoroutine(WaitTillTargetImageFinished());
+            
+        }
+        IEnumerator WaitTillTargetImageFinished()
+        {
+            yield return new WaitForSeconds(4.5f);
             _buttonPanel.SetActive(true);
             _targetIceCreamPanel.SetActive(true);
-            _finishPanel.SetActive(false);
+            _waitPanel.SetActive(false);
         }
 
         public void SetAccuracyText()
